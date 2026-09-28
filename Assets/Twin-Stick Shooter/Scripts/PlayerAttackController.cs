@@ -61,6 +61,8 @@ public class PlayerAttackController : MonoBehaviour
 
     void SpawnBullet(Vector3 aimDirection)
     {
+        print(transform.position);
+
         GameObject bullet = Instantiate(
             m_bulletPrefab,
             transform.position,
