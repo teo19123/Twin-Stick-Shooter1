@@ -33,10 +33,35 @@ public class NPCManager : MonoBehaviour
 
     public void SpawnNPC()
     {
+     
         for (int i = m_NPCList.Count; i < m_maxNPCAmount; ++i)
         {
             GameObject temp = Instantiate(m_NPCPrefab);
             m_NPCList.Add(temp.GetComponent<NPCController>());
+
+            int spawnSide = Random.Range(0, 4);
+            Vector2 spawnPosition = Vector2.zero;
+
+            switch (spawnSide)
+            {
+                case 0:
+                    // Right side
+                    spawnPosition = new Vector2(m_horizontalBounds.y, Random.Range(m_verticalBounds.x, m_verticalBounds.y));
+                    break;
+                    // Left side
+                case 1:
+                    spawnPosition = new Vector2(m_horizontalBounds.x, Random.Range(m_verticalBounds.x, m_verticalBounds.y));    
+                    break;
+                // Top side
+                case 2:
+                    spawnPosition = new Vector2(Random.Range(m_horizontalBounds.x, m_horizontalBounds.y), m_verticalBounds.y);
+                    break;
+
+                // Bottom side      
+                case 3:
+                    spawnPosition = new Vector2(Random.Range(m_horizontalBounds.x, m_horizontalBounds.y), m_verticalBounds.x);
+                    break;
+            }
 
         }
     }
@@ -59,7 +84,11 @@ public class NPCManager : MonoBehaviour
         float tempVertical = verticalBounds + m_spawmPadding;
         float tempHorizontal = horizontalBounds + m_spawmPadding;
 
-     
+        Vector2 currentCameraPosition = Camera.main.transform.position;
+
+        m_verticalBounds = new Vector2(currentCameraPosition.y - tempVertical, currentCameraPosition.y + tempVertical);
+        m_horizontalBounds = new Vector2(currentCameraPosition.x - tempHorizontal, currentCameraPosition.x + tempHorizontal);
+
     }
 }
 
