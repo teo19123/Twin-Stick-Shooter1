@@ -235,7 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_direction: {x: 0, y: 0}
   m_damage: 0
-  m_speed: 25
+  m_speed: 40
   m_lifetime: 5
 --- !u!1 &8069164829697057895
 GameObject:
